@@ -13,7 +13,7 @@
   --run:#ff6b35; --run-soft:#fff1eb;
   --plank:#7c5cff; --plank-soft:#f0ecff;
   --bike:#00b894; --bike-soft:#e3f9f4;
-  --ink:#1d2140; --muted:#8a8fa8; --line:#e8ebf4; --bg:#f3f5fb;
+  --ink:#1d2140; --muted:#727890; --line:#d3d7e0; --bg:#e2e5eb; --card:#f0f2f5; --inner:#f7f8fa; --chip:#e4e7ed;
   --tab-h:64px;
 }
 *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
@@ -52,7 +52,7 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;color:inhe
 .stats::-webkit-scrollbar{display:none}
 .stat{
   flex:0 0 auto;min-width:118px;scroll-snap-align:start;
-  background:#fff;border-radius:18px;padding:12px 14px;box-shadow:0 8px 22px rgba(40,50,100,.10);
+  background:var(--card);border-radius:18px;padding:12px 14px;box-shadow:0 8px 22px rgba(40,50,100,.10);
 }
 .stat .ico{font-size:19px}
 .stat .v{font-size:21px;font-weight:800;margin-top:5px;letter-spacing:-.5px;line-height:1.1;white-space:nowrap}
@@ -63,15 +63,26 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;color:inhe
 .view{display:none;padding:0 14px}
 .view.on{display:block;animation:fade .25s ease}
 @keyframes fade{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
-.card{background:#fff;border-radius:24px;padding:18px 16px;box-shadow:0 6px 22px rgba(40,50,100,.07);margin-bottom:14px}
+.card{background:var(--card);border-radius:24px;padding:18px 16px;box-shadow:0 6px 22px rgba(40,50,100,.07);margin-bottom:14px}
 .card h2{font-size:17px;font-weight:800;letter-spacing:-.3px}
 .sub{font-size:12px;color:var(--muted);font-weight:600;margin-top:3px}
 
 /* DATE STRIP */
-.strip{display:flex;gap:8px;overflow-x:auto;padding:4px 2px 10px;scrollbar-width:none;scroll-snap-type:x proximity}
+.stripwrap{margin:0 -14px 12px}
+.strip{
+  display:flex;gap:8px;overflow-x:auto;padding:10px 18px 14px;scrollbar-width:none;scroll-snap-type:x proximity;
+  -webkit-overflow-scrolling:touch;overscroll-behavior-x:contain;cursor:grab;
+  -webkit-mask-image:linear-gradient(90deg,transparent 0,#000 14px,#000 calc(100% - 14px),transparent 100%);
+  mask-image:linear-gradient(90deg,transparent 0,#000 14px,#000 calc(100% - 14px),transparent 100%);
+}
+.strip.drag{cursor:grabbing;scroll-snap-type:none}
+.sday .mo{position:absolute;top:6px;left:0;right:0;text-align:center;font-size:9.5px;font-weight:800;color:var(--run)}
+.sday.sel .mo{color:#fff}
+.sday.first{margin-left:6px}
+.sday.first .w{margin-top:6px}
 .strip::-webkit-scrollbar{display:none}
 .sday{
-  flex:0 0 auto;width:54px;height:74px;border-radius:18px;background:#f4f6fc;display:flex;flex-direction:column;
+  flex:0 0 auto;width:54px;height:74px;border-radius:18px;background:var(--card);display:flex;flex-direction:column;
   align-items:center;justify-content:center;gap:3px;scroll-snap-align:center;transition:.15s;position:relative;
 }
 .sday .w{font-size:11px;font-weight:700;color:var(--muted)}
@@ -89,19 +100,19 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;color:inhe
 /* ENTRY */
 .entry-head{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:14px}
 .badge-today{background:#fff1eb;color:var(--run);font-size:11px;font-weight:800;padding:3px 9px;border-radius:99px;margin-left:6px;vertical-align:2px}
-.clear-btn{font-size:13px;font-weight:700;color:var(--muted);padding:0 14px;min-height:38px;border-radius:99px;background:#f3f5fb;white-space:nowrap}
+.clear-btn{font-size:13px;font-weight:700;color:var(--muted);padding:0 14px;min-height:38px;border-radius:99px;background:var(--chip);white-space:nowrap}
 .clear-btn:active{background:#ffe9ee;color:#ff3d71}
 .ex{border-radius:22px;padding:14px;margin-bottom:12px;border:2px solid transparent;transition:.2s}
 .ex.run{background:var(--run-soft)} .ex.plank{background:var(--plank-soft)} .ex.bike{background:var(--bike-soft)}
 .ex.done.run{border-color:var(--run)} .ex.done.plank{border-color:var(--plank)} .ex.done.bike{border-color:var(--bike)}
 .ex-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px}
 .ex-name{display:flex;align-items:center;gap:10px;font-weight:800;font-size:17px}
-.ex-ico{width:40px;height:40px;border-radius:13px;display:grid;place-items:center;font-size:21px;background:#fff}
-.status{font-size:12px;font-weight:800;padding:6px 12px;border-radius:99px;background:#fff;color:var(--muted)}
+.ex-ico{width:40px;height:40px;border-radius:13px;display:grid;place-items:center;font-size:21px;background:var(--inner)}
+.status{font-size:12px;font-weight:800;padding:6px 12px;border-radius:99px;background:var(--inner);color:var(--muted)}
 .ex.done .status{color:#fff}
 .ex.done.run .status{background:var(--run)} .ex.done.plank .status{background:var(--plank)} .ex.done.bike .status{background:var(--bike)}
 .fields{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-.field{background:#fff;border-radius:16px;padding:9px 10px 10px;min-width:0}
+.field{background:var(--inner);border-radius:16px;padding:9px 10px 10px;min-width:0}
 .field label{font-size:12px;font-weight:700;color:var(--muted);padding-left:2px}
 .field .row{display:flex;align-items:baseline;gap:4px;padding:2px 2px 8px}
 .field input{
@@ -112,7 +123,7 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;color:inhe
 .field input::placeholder{color:#cdd1e2}
 .field .u{font-size:14px;font-weight:700;color:var(--muted)}
 .step{display:grid;grid-template-columns:1fr 1fr;gap:8px}
-.step button{height:44px;border-radius:12px;font-weight:800;font-size:15px;background:#f3f5fb;color:var(--ink)}
+.step button{height:44px;border-radius:12px;font-weight:800;font-size:15px;background:var(--chip);color:var(--ink)}
 .step button:active{transform:scale(.94)}
 .ex.run .step button:active{background:var(--run);color:#fff}
 .ex.plank .step button:active{background:var(--plank);color:#fff}
@@ -132,7 +143,7 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;color:inhe
 .cal .dow:first-child{color:#ff5c7a}
 .day{
   aspect-ratio:1/1.12;border-radius:14px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px;
-  font-weight:700;font-size:15px;background:#f7f8fc;position:relative;
+  font-weight:700;font-size:15px;background:var(--chip);position:relative;
 }
 .day:active{transform:scale(.94)}
 .day.today{box-shadow:inset 0 0 0 2px #ff6b35}
@@ -144,15 +155,15 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;color:inhe
 
 /* CHART */
 .tabs{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:14px}
-.tab{padding:11px 4px;min-height:46px;border-radius:14px;font-weight:800;font-size:14px;background:#f3f5fb;color:var(--muted)}
+.tab{padding:11px 4px;min-height:46px;border-radius:14px;font-weight:800;font-size:14px;background:var(--chip);color:var(--muted)}
 .tab.on{color:#fff;box-shadow:0 6px 14px rgba(0,0,0,.14)}
 .tab.on[data-ex=run]{background:var(--run)} .tab.on[data-ex=plank]{background:var(--plank)} .tab.on[data-ex=bike]{background:var(--bike)}
-.seg{display:flex;background:#f3f5fb;border-radius:14px;padding:4px;margin-top:10px}
+.seg{display:flex;background:var(--chip);border-radius:14px;padding:4px;margin-top:10px}
 .seg:empty{display:none}
 .seg button{flex:1;min-height:40px;border-radius:11px;font-size:14px;font-weight:800;color:var(--muted)}
-.seg button.on{background:#fff;color:var(--ink);box-shadow:0 2px 8px rgba(0,0,0,.1)}
+.seg button.on{background:var(--inner);color:var(--ink);box-shadow:0 2px 8px rgba(0,0,0,.1)}
 .chips{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin:14px 0 4px}
-.chip{background:#f7f8fc;border-radius:14px;padding:10px}
+.chip{background:var(--chip);border-radius:14px;padding:10px}
 .chip .l{font-size:11px;font-weight:700;color:var(--muted)}
 .chip .v{font-size:15px;font-weight:800;margin-top:3px;letter-spacing:-.3px;word-break:keep-all}
 .readout{display:flex;align-items:center;justify-content:space-between;gap:8px;font-size:13px;font-weight:700;color:var(--muted);margin:10px 2px 4px}
@@ -166,13 +177,13 @@ svg{display:block;width:100%;height:auto}
 .empty{text-anchor:middle;font-size:13px;fill:#b4b9cf;font-weight:700}
 
 .foot{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin:6px 14px 0}
-.foot button,.foot label{background:#fff;padding:0 18px;min-height:44px;display:inline-flex;align-items:center;border-radius:99px;font-size:13px;font-weight:700;color:var(--muted);box-shadow:0 4px 14px rgba(40,50,100,.06);cursor:pointer}
+.foot button,.foot label{background:var(--card);padding:0 18px;min-height:44px;display:inline-flex;align-items:center;border-radius:99px;font-size:13px;font-weight:700;color:var(--muted);box-shadow:0 4px 14px rgba(40,50,100,.06);cursor:pointer}
 .note{text-align:center;font-size:11.5px;color:#a9aec4;margin:12px 20px 0;font-weight:600;line-height:1.5}
 
 /* TAB BAR */
 .tabbar{
   position:fixed;left:0;right:0;bottom:0;z-index:50;
-  background:rgba(255,255,255,.94);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+  background:rgba(240,242,245,.96);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
   border-top:1px solid var(--line);padding-bottom:env(safe-area-inset-bottom);
 }
 .tabbar-in{max-width:560px;margin:0 auto;display:grid;grid-template-columns:repeat(3,1fr);height:var(--tab-h)}
@@ -212,9 +223,7 @@ svg{display:block;width:100%;height:auto}
 
   <!-- 기록 -->
   <section class="view on" id="v-log">
-    <div class="card" style="padding-bottom:10px">
-      <div class="strip" id="strip"></div>
-    </div>
+    <div class="stripwrap"><div class="strip" id="strip"></div></div>
     <div class="card">
       <div class="entry-head">
         <div>
@@ -411,11 +420,14 @@ function renderStats(){
 /* ---------- 날짜 스트립 ---------- */
 function renderStrip(center){
   const el=$('#strip'), prev=el.scrollLeft;
-  const n=daysIn(view.y,view.m); let h='';
-  for(let d=1;d<=n;d++){
-    const k=keyOf(view.y,view.m,d), wd=DOW[new Date(view.y,view.m,d).getDay()];
-    h+=`<button class="sday ${k===todayKey?'today':''} ${k===sel?'sel':''} ${doneCount(k)===3?'perfect':''}" data-k="${k}">
-      <span class="w">${wd}</span><span class="n">${d}</span><span class="dots">${dotsOf(k)}</span></button>`;
+  // 이전 달 1일 ~ 다음 달 말일까지 이어서 스크롤
+  const start=new Date(view.y,view.m-1,1), end=new Date(view.y,view.m+2,0);
+  let h='';
+  for(let dt=new Date(start); dt<=end; dt.setDate(dt.getDate()+1)){
+    const y=dt.getFullYear(), m=dt.getMonth(), d=dt.getDate(), k=keyOf(y,m,d);
+    const first=(d===1);
+    h+=`<button class="sday ${first?'first':''} ${k===todayKey?'today':''} ${k===sel?'sel':''} ${doneCount(k)===3?'perfect':''}" data-k="${k}">
+      ${first?`<span class="mo">${m+1}월</span>`:''}<span class="w">${DOW[dt.getDay()]}</span><span class="n">${d}</span><span class="dots">${dotsOf(k)}</span></button>`;
   }
   el.innerHTML=h;
   if(center) centerStrip(); else el.scrollLeft=prev;
@@ -545,7 +557,7 @@ function renderChart(anim){
     <defs><linearGradient id="g" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="${x.color}"/><stop offset="1" stop-color="${x.color2}"/></linearGradient></defs>`;
   for(let v=0;v<=top+0.0001;v+=step){
     const y=T+ih-(v/top)*ih;
-    s+=`<line x1="${L}" x2="${W-R}" y1="${y}" y2="${y}" stroke="#e8ebf4" ${v===0?'':'stroke-dasharray="4 5"'}/>`;
+    s+=`<line x1="${L}" x2="${W-R}" y1="${y}" y2="${y}" stroke="#d3d7e0" ${v===0?'':'stroke-dasharray="4 5"'}/>`;
     s+=`<text x="${L-6}" y="${y+4}" text-anchor="end" font-size="11" font-weight="700" fill="#9aa0b8">${chartEx==='plank'?fmtSecAxis(v):fmtNum(v)}</text>`;
   }
   vals.forEach((v,i)=>{
@@ -555,9 +567,9 @@ function renderChart(anim){
       const h=Math.max(4,(v/top)*ih);
       s+=`<rect class="bar" style="animation-delay:${i*10}ms" x="${cx-bw/2}" y="${T+ih-h}" width="${bw}" height="${h}" rx="${Math.min(5,bw/2)}" fill="url(#g)"/>`;
     }else{
-      s+=`<rect x="${cx-bw/2}" y="${T+ih-3}" width="${bw}" height="3" rx="1.5" fill="#e3e6f1"/>`;
+      s+=`<rect x="${cx-bw/2}" y="${T+ih-3}" width="${bw}" height="3" rx="1.5" fill="#cfd4de"/>`;
     }
-    if((d-1)%stride===0||k===sel) s+=`<text x="${cx}" y="${H-8}" text-anchor="middle" font-size="11" font-weight="${k===sel?800:700}" fill="${k===sel?x.color:(k===todayKey?'#ff6b35':'#9aa0b8')}">${d}</text>`;
+    if(k===sel||((d-1)%stride===0&&Math.abs(d-sd)>=stride)) s+=`<text x="${cx}" y="${H-8}" text-anchor="middle" font-size="11" font-weight="${k===sel?800:700}" fill="${k===sel?x.color:(k===todayKey?'#ff6b35':'#9aa0b8')}">${d}</text>`;
   });
   if(sum===0) s+=`<text class="empty" x="${W/2}" y="${T+ih/2}">아직 기록이 없어요 💪</text>`;
   s+='</svg>';
@@ -576,7 +588,9 @@ function showTab(t){
 function renderAll(){renderStats();renderStrip(true);renderCalendar();renderEntry();renderChart(true)}
 function refreshLive(){renderStats();renderStrip(false);renderCalendar();updateEntryLive();renderChart(false)}
 function selectDay(k,anim){
-  sel=k; renderStrip(true); renderCalendar(); renderEntry(); renderChart(anim);
+  const [y,m]=k.split('-').map(Number);
+  sel=k; view={y,m:m-1};
+  renderStats(); renderStrip(true); renderCalendar(); renderEntry(); renderChart(anim);
 }
 
 let toastT;
@@ -598,10 +612,24 @@ $('#todayBtn').onclick=()=>{view={y:now.getFullYear(),m:now.getMonth()};sel=toda
 document.querySelectorAll('.tabbar button').forEach(b=>b.onclick=()=>showTab(b.dataset.tab));
 $('#goLog').onclick=()=>showTab('log');
 
+let stripMoved=false;
 $('#strip').addEventListener('click',e=>{
+  if(stripMoved){stripMoved=false;return}
   const b=e.target.closest('.sday'); if(!b) return;
   selectDay(b.dataset.k,false);
 });
+// 마우스로도 끌어서 좌우 스크롤 (터치는 기본 스와이프)
+(function(){
+  const el=$('#strip'); let down=false,sx=0,sl=0;
+  el.addEventListener('pointerdown',e=>{ if(e.pointerType!=='mouse') return; down=true;sx=e.clientX;sl=el.scrollLeft;stripMoved=false; });
+  window.addEventListener('pointermove',e=>{
+    if(!down) return;
+    const dx=e.clientX-sx;
+    if(Math.abs(dx)>5){stripMoved=true;el.classList.add('drag')}
+    if(stripMoved) el.scrollLeft=sl-dx;
+  });
+  window.addEventListener('pointerup',()=>{ if(!down) return; down=false; el.classList.remove('drag'); setTimeout(()=>{stripMoved=false},0); });
+})();
 $('#cal').addEventListener('click',e=>{
   const b=e.target.closest('.day'); if(!b) return;
   selectDay(b.dataset.k,false); showTab('log');
